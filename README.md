@@ -1,12 +1,31 @@
 # API Gatekeeper
 
-A lightweight Express.js API gateway that protects endpoints using rate limiting and suspicious pattern detection.
+API Gatekeeper is a lightweight Express.js middleware service designed to protect APIs from abuse and suspicious activity using rate limiting, pattern detection, and request logging.
 
-## Features
+## 🔒 Features
 
-- **Rate Limiting** — blocks IPs exceeding 10 requests per 60 seconds
-- **Pattern Detection** — rejects requests containing suspicious phrases in the body
-- **Request Logging** — logs all blocked requests with IP, reason, and timestamp to a JSON file
+### Rate Limiting
+Implements a sliding window algorithm to restrict each IP to a maximum of **10 requests per 60 seconds**, preventing spam and abuse.
+
+### Pattern Detection
+Scans incoming request payloads and blocks requests containing suspicious phrases such as:
+- "wire transfer"
+- "inheritance"
+- "urgent crypto"
+
+### 📝 Request Logging
+All blocked requests are logged with:
+- IP address
+- Reason (rate limit / suspicious pattern)
+- Timestamp
+
+Logs are stored in a lightweight JSON file.
+
+---
+
+## 🧠 Architecture
+
+The application follows a modular middleware-based design:
 
 ## Project Structure
 
@@ -72,3 +91,6 @@ const SUSPICIOUS_PATTERNS = [
   "urgent crypto"
 ];
 ```
+**Testing**
+
+You can test the API using tools like Thunder Client or Postman.
